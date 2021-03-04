@@ -36,5 +36,12 @@ let resObject= {}
 app.get('/api/timestamp/:input', (req, res) => {
   let input= req.params.input 
   
-  res.json(input)
+  if(input.includes('-')){
+    //date to string
+    resObject['unix'] = new Date(input).getTime()
+    resObject['utc'] = new Date(input).toUTCString
+  }
+  
+  
+  res.json(resObject)
 });
