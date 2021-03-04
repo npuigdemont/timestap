@@ -33,27 +33,28 @@ var listener = app.listen(process.env.PORT, function () {
 
 
 let resObject= {}
-app.get('/api/timestamp/:input', (req, res) => {
-  let input= req.params.input 
+
+app.get('/api/timestamp/:date_string', (req, res) => {
+  let date_string= req.params.date_string 
   
-  if(input.includes('-')){
+  if(date_string.includes('-' || ' ' || '/')){
     //date to string
-    resObject['unix'] = new Date(input).getTime()
-    resObject['utc'] = new Date(input).toUTCString()
+    resObject['unix'] = new Date(date_string).getTime()
+    resObject['utc'] = new Date(date_string).toUTCString()
   }else {
     //timestamp
-    input = parseInt(input)
+    date_string = parseInt(date_string)
     
-    resObject['unix'] = new Date(input).getTime()
-    resObject['utc'] = new Date(input).toUTCString()
+    resObject['unix'] = new Date(date_string).getTime()
+    resObject['utc'] = new Date(date_string).toUTCString()
   }
   if(!resObject['unix'] || !resObject['utc']) {
     res.json({ error : "Invalid Date" })
   }
-  if(typeof input == "string") {
-    resObject['unix'] = Date.parse
-    resObject['utc'] = new Date(input).toUTCString()
-  }
+  //if(typeof input == "string") {
+  //  resObject['unix'] = Date.parse(input).getTime()
+  //  resObject['utc'] = Date.parse(input).toUTCString()
+  //}
   
   res.json(resObject)
 })
