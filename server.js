@@ -37,10 +37,17 @@ let resObject= {}
 app.get('/api/timestamp/:date_string', (req, res) => {
   let date_string= req.params.date_string 
   
-  if(date_string.includes('-' || ' ' || '/')){
-    //date to string
+  if(date_string.includes('-' || '/')){
+    //date to string if have - or /
     resObject['unix'] = new Date(date_string).getTime()
     resObject['utc'] = new Date(date_string).toUTCString()
+  }
+    if(date_string.includes(' ')){
+    //date to string if have spaces
+    resObject['unix'] = new Date(date_string).getTime()
+    resObject['utc'] = new Date(date_string).toUTCString()
+    
+    
   }else {
     //timestamp
     date_string = parseInt(date_string)
