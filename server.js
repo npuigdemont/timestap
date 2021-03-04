@@ -39,7 +39,13 @@ app.get('/api/timestamp/:input', (req, res) => {
   if(input.includes('-')){
     //date to string
     resObject['unix'] = new Date(input).getTime()
-    resObject['utc'] = new Date(input).toUTCString
+    resObject['utc'] = new Date(input).toUTCString()
+  }else {
+    //timestamp
+    input = parseInt(input)
+    
+    resObject['unix'] = new Date(input).getTime()
+    resObject['utc'] = new Date(input).toUTCString()
   }
   
   
