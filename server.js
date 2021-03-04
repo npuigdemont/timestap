@@ -42,10 +42,10 @@ app.get('/api/timestamp/:date_string', (req, res) => {
     resObject['unix'] = new Date(date_string).getTime()
     resObject['utc'] = new Date(date_string).toUTCString()
   }
-    if(date_string<10000){
+    if(parseInt(date_string) < 10000){
     //date to string if not's unix
       
-    resObject['unix'] = Date.parse(date_string)
+  resObject['unix'] = Date.parse(date_string)
    resObject['utc'] = new Date(date_string).toUTCString() 
   
   }
