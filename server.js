@@ -42,14 +42,14 @@ app.get('/api/timestamp/:date_string', (req, res) => {
     resObject['unix'] = new Date(date_string).getTime()
     resObject['utc'] = new Date(date_string).toUTCString()
   }
-    if(date_string.includes(' ')){
-    //date to string if have spaces
+    if(date_string<10000){
+    //date to string if not's unix
       
     resObject['unix'] = Date.parse(date_string)
-    resObject['utc'] = Date.parse(date_string).toUTCString()
-    
-    
-  }else {
+   resObject['utc'] = new Date(date_string).toUTCString() 
+  
+  }
+  else {
     //timestamp
     date_string = parseInt(date_string)
     
@@ -59,10 +59,6 @@ app.get('/api/timestamp/:date_string', (req, res) => {
   if(!resObject['unix'] || !resObject['utc']) {
     res.json({ error : "Invalid Date" })
   }
-  //if(typeof input == "string") {
-  //  resObject['unix'] = Date.parse(input).getTime()
-  //  resObject['utc'] = Date.parse(input).toUTCString()
-  //}
   
   res.json(resObject)
 })
