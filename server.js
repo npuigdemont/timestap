@@ -44,8 +44,8 @@ app.get('/api/timestamp/:date_string', (req, res) => {
   }
     if(date_string.includes(' ')){
     //date to string if have spaces
-    resObject['unix'] = new Date(date_string).getTime()
-    resObject['utc'] = new Date(date_string).toUTCString()
+    resObject['unix'] = Date.parse(date_string).getTime()
+    resObject['utc'] = Date.parse(date_string).toUTCString()
     
     
   }else {
