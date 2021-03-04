@@ -50,7 +50,10 @@ app.get('/api/timestamp/:input', (req, res) => {
   if(!resObject['unix'] || !resObject['utc']) {
     res.json({ error : "Invalid Date" })
   }
-  if(input=)
+  if(typeof input == "string") {
+    resObject['unix'] = Date.parse
+    resObject['utc'] = new Date(input).toUTCString()
+  }
   
   res.json(resObject)
 })
